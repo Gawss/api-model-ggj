@@ -4,7 +4,7 @@ from keras.models import Sequential
 from keras.models import model_from_json
 from sklearn.preprocessing import MinMaxScaler
 import csv
-from flask import Flask
+from flask import Flask, jsonify
 
 inputs_ = []
 outputs_ = []
@@ -64,7 +64,14 @@ def predict():
     print(scaler_2.inverse_transform(loaded_model.predict(inputs_fit[699:999], batch_size=10, verbose=0, steps=None)[:5]))
     print('Generated - 200:')
     print(scaler_3.inverse_transform(loaded_model.predict(inputs_testing, batch_size=10, verbose=0, steps=None)))
-    return "Prediction"
+    
+    data = {
+        'positionX': '1000',
+        'positionY': '500',
+        'value': '300',
+        'type': 'powerUp_02'
+    }
+    return jsonify(data)
  
 if __name__ == "__main__":
     app.run()
