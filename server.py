@@ -49,7 +49,6 @@ print("Loaded model from disk")
 app = Flask(__name__)
 
 numPlayers = 0
-startLvl = False
 
 playerOne_posX = 0
 playerOne_posY = 0
@@ -84,7 +83,6 @@ def predict():
 @app.route("/start", methods=['POST'])
 def start():
     global numPlayers
-    global startLvl
 
     if(request.get_json()['ready'] == 'False'):
         if(numPlayers < 4):
@@ -94,11 +92,6 @@ def start():
                 'player_num': newPlayerID,
                 'start': 'False'
             }
-        else:
-            data = {
-                'start': 'True'
-            }
-            startLvl = True
     else:
         if(numPlayers == 4):
             data = {
@@ -108,8 +101,7 @@ def start():
             data = {
                 'start': 'False'
             }
-    print(numPlayers)
-    print(startLvl)
+    print(numPlayers)    
     return jsonify(data)
 
 @app.route("/update", methods=['POST'])
