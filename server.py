@@ -55,9 +55,10 @@ def predict():
     loaded_model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mae', 'acc'])
     
     prediction = scaler_3.inverse_transform(loaded_model.predict(inputs_testing, batch_size=10, verbose=0, steps=None))
-    rq_body = request.get_json()
-    print(rq_body)
-    print("health: " + str(rq_body['health']))
+    if(request.get_json()):
+        rq_body = request.get_json()
+        print(rq_body)
+        print("health: " + str(rq_body['health']))
     data = {
         'positionX': '1000',
         'positionY': '500',
