@@ -4,4 +4,3 @@ flask-sqlalchemy
 gunicorn
 keras
 sklearn
-csv
